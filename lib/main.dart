@@ -13,9 +13,11 @@ import 'pages/onboarding.dart';
 import 'pages/settings.dart';
 
 void main() async {
-  await dotenv.load(fileName: '.env');
-  var url = dotenv.env['SUPABASE_URL']!;
-  var anonKey = dotenv.env['SUPABASE_ANON_KEY']!;
+  // await dotenv.load(fileName: '.env');
+  // var url = dotenv.env['SUPABASE_URL']!;
+  // var anonKey = dotenv.env['SUPABASE_ANON_KEY']!;
+  const url = String.fromEnvironment('SUPABASE_URL');
+  const anonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
   WidgetsFlutterBinding.ensureInitialized();
   print('url and keys');
   print(url);
@@ -29,6 +31,23 @@ void main() async {
 
 final _router = GoRouter(
   initialLocation: '/login',
+  redirect: (context, state) {
+    if (Supabase.instance.client.auth.currentUser == null) {
+      return '/login';
+    }
+    return null;
+  },
+  errorBuilder: (context, state) {
+    if (supabase.auth.currentUser != null) {
+      print('user is not null');
+      GoRouter.of(context).go('/onboarding');
+    }
+    return Scaffold(
+      body: Center(
+        child: Text('Page not found'),
+      ),
+    );
+  },
   routes: [
     GoRoute(
       path: '/',
