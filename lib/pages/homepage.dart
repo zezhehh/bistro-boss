@@ -2,15 +2,16 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:namer_app/pages/notifications.dart';
-import 'package:namer_app/pages/proposal_generator.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:namer_app/pages/settings.dart';
+import './proposal_generator.dart';
 import '../components/dish_carousel.dart';
 import '../components/home_selection.dart';
 import '../components/notification_card.dart';
 
 import '../components/notification_modal.dart';
 import '../route_state.dart';
+import 'notifications.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -21,6 +22,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  var isDialOpen = ValueNotifier<bool>(false);
   int currentPageIndex = 0;
 
   @override
@@ -28,17 +30,43 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
         key: scaffoldKey,
         drawer: HomeSelection(),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: SpeedDial(
           shape: CircleBorder(),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ProposalGenerator(),
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.post_add),
+              labelWidget: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Create a proposal'),
               ),
-            );
-          },
-          child: const Icon(Icons.add),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProposalGenerator(),
+                  ),
+                );
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.rate_review),
+              labelWidget: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Record a dish'),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProposalGenerator(),
+                  ),
+                );
+              },
+            ),
+          ],
+          icon: Icons.add,
+          activeIcon: Icons.close,
+          openCloseDial: isDialOpen,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: AnimatedBottomNavigationBar(
@@ -46,7 +74,7 @@ class _HomepageState extends State<Homepage> {
           gapLocation: GapLocation.center,
           notchSmoothness: NotchSmoothness.defaultEdge,
           icons: const <IconData>[
-            Icons.explore_outlined,
+            Icons.explore,
             Icons.inventory_2_outlined,
           ],
           iconSize: 30,
