@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class CardFloatingButton extends StatelessWidget {
   final List<Widget>? children;
-  const CardFloatingButton({super.key, this.children});
+  final double height;
+  const CardFloatingButton({super.key, this.children, this.height = 40});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class CardFloatingButton extends StatelessWidget {
           decoration: BoxDecoration(
               color: Colors.purple[50], borderRadius: BorderRadius.circular(8)),
           width: screenWidth * 0.8,
-          height: 40,
+          height: height,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: children ?? [],

@@ -4,8 +4,8 @@ import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 
 final supabase = Supabase.instance.client;
 
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+class MenuScreen extends StatelessWidget {
+  const MenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,25 @@ class SettingScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 style: style,
-                child: Text('Sign Out'),
+                child: Text('Manage all dishes'),
                 onPressed: () {
                   print('cliced');
-                  supabase.auth.signOut().then((value) {
-                    print('signed out');
-                    GoRouter.of(context).go('/login');
-                  });
+                },
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                style: style,
+                child: Text('Manage all recipes'),
+                onPressed: () {
+                  print('cliced');
+                },
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                style: style,
+                child: Text('Manage all ingredients'),
+                onPressed: () {
+                  print('cliced');
                 },
               ),
             ],

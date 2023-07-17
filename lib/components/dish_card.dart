@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class DishCard extends StatelessWidget {
   final Widget? actions;
+  final double heightRatio;
   const DishCard({
     super.key,
     this.actions,
+    this.heightRatio = 0.2,
   });
 
   @override
@@ -16,7 +18,7 @@ class DishCard extends StatelessWidget {
       alignment: Alignment.center,
       child: Card(
         child: Container(
-          height: 0.2 * screenHeight,
+          height: heightRatio * screenHeight,
           width: 0.8 * screenWidth,
           decoration: BoxDecoration(
             image: DecorationImage(
