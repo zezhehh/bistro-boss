@@ -22,9 +22,16 @@ class ProposalSelector extends StatelessWidget {
             width: screenWidth * 0.8,
             child: Column(
               children: [
-                TextField(
-                  decoration: InputDecoration(hintText: "Search for a dish"),
+                SizedBox(
+                  height: 20,
                 ),
+                SearchBar(
+                  leading: Icon(Icons.search),
+                  hintText: "Search for a dish",
+                ),
+                // TextField(
+                //   decoration: InputDecoration(hintText: "Search for a dish"),
+                // ),
                 SizedBox(
                   height: 20,
                 ),

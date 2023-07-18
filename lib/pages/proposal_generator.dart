@@ -45,57 +45,63 @@ class ProposalGenerator extends StatelessWidget {
       minimumSize: Size(screenWidth * 0.8, 50),
     );
     return Scaffold(
-        body: Column(
-      children: [
-        AppBar(
-          title: Text("Create a proposal for dinner"),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return DishCard(
-                actions: CardFloatingButton(children: [
-                  Text('4 eggs'),
-                  Text('2 apples'),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.remove)),
-                ]),
-              );
-            },
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Column(children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProposalSelector()),
-              );
-            },
-            style: style,
-            child: Text("Add additional dish"),
+      body: Column(
+        children: [
+          AppBar(
+            title: Text("Create a proposal for dinner"),
           ),
           SizedBox(
             height: 20,
           ),
-          ElevatedButton(
-            onPressed: () {
-              showAlertDialog(context);
-            },
-            style: style,
-            child: Text("Send proposal"),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return DishCard(
+                  actions: CardFloatingButton(
+                    children: [
+                      Text('4 eggs'),
+                      Text('2 apples'),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.remove),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-        ]),
-        SizedBox(
-          height: 20,
-        ),
-      ],
-    ));
+          SizedBox(
+            height: 20,
+          ),
+          Column(children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProposalSelector()),
+                );
+              },
+              style: style,
+              child: Text("Add additional dish"),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                showAlertDialog(context);
+              },
+              style: style,
+              child: Text("Send proposal"),
+            ),
+          ]),
+          SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
+    );
   }
 }

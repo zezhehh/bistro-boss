@@ -117,6 +117,7 @@ dependencies:
   go_router: ^9.0.3
   flutter_dotenv: ^5.1.0
   flutter_speed_dial: ^7.0.0
+  floating_draggable_widget: ^2.1.2
 
 dev_dependencies:
   flutter_test:

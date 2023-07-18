@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:namer_app/pages/inventory.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 
 final supabase = Supabase.instance.client;
@@ -40,6 +41,10 @@ class MenuScreen extends StatelessWidget {
                 style: style,
                 child: Text('Manage all ingredients'),
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Inventory()),
+                  );
                   print('cliced');
                 },
               ),
